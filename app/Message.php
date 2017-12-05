@@ -1,11 +1,12 @@
 <?php
 
 namespace App;
-
+use Laravel\Scout\Searchable;
 use Illuminate\Database\Eloquent\Model;
 
 class Message extends Model
 {
+	use Searchable;
    	protected $guarded=[];
    	public function user(){
    		return $this->belongsTo(User::class);
@@ -20,5 +21,17 @@ class Message extends Model
 		}	
 		
 		return \Storage::disk('public')->url($image);
-	}   
+	} 
+
+	public function toSearchableArray()
+	{
+		$this->load('user');
+
+		return $this->toArray();
+	}  
+
+	public function responses()
+	{
+		return->hasMany(Response::class)->latest();
+	}
 }

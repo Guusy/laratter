@@ -33,7 +33,8 @@ class MessagesController extends Controller
 	{
 		$textoAdentroDelMensaje = $request->input('query');
 
-		$messages = Message::with('user')->where('content','LIKE',"%$textoAdentroDelMensaje%")->get();
+		$messages = Message::search($textoAdentroDelMensaje)->get();
+		$messages->load('user');
 
 		return view('messages.index',[
 			'messages' => $messages

@@ -14,6 +14,16 @@ class ExampleTest extends TestCase
      */
     public function testBasicTest()
     {
-        $this->assertTrue(true);
+       // $this->assertTrue(true);
+    	$response = $this->get('/');
+
+    	$response->assertStatus(200);
+    	$response->assertSee("Laratter");
+    }
+
+    public function testCanSearchForMessages(){
+    	$response = $this->get('/messages?query=fannie');
+
+    	$response->assertStatus(302);
     }
 }

@@ -1,6 +1,6 @@
 
 window._ = require('lodash');
-
+import Popper from 'popper.js/dist/umd/popper.js';
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
  * for JavaScript based Bootstrap features such as modals and tabs. This
@@ -9,7 +9,8 @@ window._ = require('lodash');
 
 try {
     window.$ = window.jQuery = require('jquery');
-
+    windon.Tether = require('tether');
+    window.Popper = Popper;
     require('bootstrap-sass');
 } catch (e) {}
 
@@ -18,6 +19,7 @@ try {
  * to our Laravel back-end. This library automatically handles sending the
  * CSRF token as a header based on the value of the "XSRF" token cookie.
  */
+window.Vue = require('vue');
 
 window.axios = require('axios');
 
